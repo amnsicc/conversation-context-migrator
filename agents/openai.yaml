@@ -1,4 +1,4 @@
 interface:
   display_name: "通用对话上下文迁移器"
-  short_description: "按宿主工作区归档，并经严格三档批准选择性继承"
-  default_prompt: "使用 $conversation-context-migrator 时先核对磁盘当前版本；蒸馏时将新单元归当前对话宿主工作区；继承前提交三档预检，只有我明确批准当前档位后才读取正文。"
+  short_description: "精简蒸馏与三档选择性继承，强制写后验证"
+  default_prompt: "使用 $conversation-context-migrator：蒸馏时写入当前工作区且同项目串行；继承时先提交保守、推荐、充分三档并等待我批准。"
