@@ -1,4 +1,4 @@
 interface:
   display_name: "通用对话上下文迁移器"
-  short_description: "精简蒸馏与三档选择性继承，强制写后验证"
-  default_prompt: "使用 $conversation-context-migrator：蒸馏时写入当前工作区且同项目串行；继承时先提交保守、推荐、充分三档并等待我批准。"
+  short_description: "快捷蒸馏、三档继承、孤立单元预检与写后验证"
+  default_prompt: "使用 $conversation-context-migrator：可用 /推荐继承、/充分继承、/蒸馏、/检查索引；继承先预检并等待批准，蒸馏写入当前工作区。"

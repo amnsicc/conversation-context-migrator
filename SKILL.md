@@ -1,6 +1,6 @@
 ---
 name: conversation-context-migrator
-description: 通用对话上下文迁移与选择性继承 skill。Use to distill the current conversation into a project-local Chinese context unit, selectively inherit context units through an approval-gated three-tier preflight, persist actual inheritance links during later distillation, or recover an omitted unit/index entry. New units belong to the current conversation workspace. Same-project distillation is intentionally serial. Do not replace a domain-specific exporter when the user explicitly requests that specialized format.
+description: 通用对话上下文迁移与选择性继承 skill。Use when the user asks 通用对话上下文迁移器 or shortcuts /推荐继承, /充分继承, /蒸馏, /检查索引 to distill the current conversation into a project-local Chinese context unit, inherit context through an approval-gated preflight, persist actual inheritance links, or inspect omitted unit/index entries. New units belong to the current conversation workspace. Same-project distillation is serial. Do not replace a domain-specific exporter when requested.
 ---
 
 # 通用对话上下文迁移器
@@ -9,7 +9,7 @@ description: 通用对话上下文迁移与选择性继承 skill。Use to distil
 
 把长对话压缩为可检索的上下文单元，并让其它对话按需继承；不复制完整历史，不把单元写成任务交接单。
 
-当前规则版本：`3.0`。当前单元协议版本：`3.0`。
+当前规则版本：`3.1`。当前单元协议版本：`3.0`。
 
 每次调用先读取 [current-version.md](references/current-version.md)。若线程记忆与磁盘版本不一致，重新读取本文件和本次模式所需引用文件。历史单元中的版本字段不决定当前执行规则。
 
@@ -34,6 +34,15 @@ description: 通用对话上下文迁移与选择性继承 skill。Use to distil
 3. **同项目串行蒸馏**：同一项目同一时间只执行一个蒸馏；不同项目可并发。同项目继承读取可并发。
 4. **继承先批准**：读取任何单元正文或来源文件前，先提交保守档、推荐档、充分档，等待用户批准。
 5. **写后验证**：单元文件真实存在且索引已登记前，不得报告蒸馏成功；不得把其它相似单元当作当前单元。
+
+## 快捷命令
+
+用户输入快捷命令时，按对应模式执行。若缺少当前工作项目、当前任务、入口单元或写入位置等关键信息，先问最关键问题；不要猜。
+
+- `/推荐继承`：进入继承与检索。读取当前项目索引和完整单元目录建立候选池，提交保守档、推荐档、充分档预检，默认推荐推荐档。批准前不得读取单元正文或来源文件。
+- `/充分继承`：进入继承与检索，并强化充分档预检。必须从完整单元目录考虑未链接孤立单元；说明相关孤立单元和跳过依据。充分档仍只读当前意图相关材料，不等于全项目全文读取。
+- `/蒸馏`：进入蒸馏当前对话。默认蒸馏尚未蒸馏且有长期价值的新增上下文；首次蒸馏覆盖本对话从开始到当前消息的有价值内容，后续蒸馏只覆盖上次锚点之后的新内容。
+- `/检查索引`：进入索引健康检查。只检查索引、目录元数据和单元文件名；不读取所有单元正文。发现漏登、断链、重复标识或路径失效时，先给修复清单。
 
 ## 模式路由
 
