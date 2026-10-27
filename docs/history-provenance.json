@@ -1,0 +1,207 @@
+{
+  "history_type": "reconstructed",
+  "snapshots": [
+    {
+      "label": "retained-2.4",
+      "author_date": "2026-06-12T09:45:39+08:00",
+      "basis": "Newest preserved source-file modification time within a retained local version snapshot; not an original Git commit timestamp.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "source_sha256": "494d0d4b9cd07e6197c4039fcaf95e5d8d97a935f098c6231eaa811e701605e3",
+          "export_sha256": "494d0d4b9cd07e6197c4039fcaf95e5d8d97a935f098c6231eaa811e701605e3",
+          "source_mtime": "2026-06-12T09:45:39+08:00"
+        },
+        {
+          "path": "references/adaptive-reading-levels.md",
+          "source_sha256": "3d6b908256625e3f0574520400a4d0183201d9daa81778d22376ff0122efca9c",
+          "export_sha256": "3d6b908256625e3f0574520400a4d0183201d9daa81778d22376ff0122efca9c",
+          "source_mtime": "2026-06-11T23:54:24+08:00"
+        },
+        {
+          "path": "references/cross-project-discovery.md",
+          "source_sha256": "394773e3fca08702db93a770443aa3b64b3d4296273edd55fc809b9af8956f11",
+          "export_sha256": "394773e3fca08702db93a770443aa3b64b3d4296273edd55fc809b9af8956f11",
+          "source_mtime": "2026-06-12T09:45:39+08:00"
+        },
+        {
+          "path": "references/current-version.md",
+          "source_sha256": "f4d11abb42c402e5135abacc1c6f864eabed797c3f14f44f46bff5a9e5865f58",
+          "export_sha256": "f4d11abb42c402e5135abacc1c6f864eabed797c3f14f44f46bff5a9e5865f58",
+          "source_mtime": "2026-06-12T09:45:39+08:00"
+        },
+        {
+          "path": "references/inheritance-protocol.md",
+          "source_sha256": "3123f851c2807ed1b610947b1e804087a1ac33d535d9360ddfafda2c965e5b97",
+          "export_sha256": "3123f851c2807ed1b610947b1e804087a1ac33d535d9360ddfafda2c965e5b97",
+          "source_mtime": "2026-06-12T09:45:39+08:00"
+        },
+        {
+          "path": "references/migration-document-schema.md",
+          "source_sha256": "7fc3e1fd9551eab1b359db4eb8925f7b1d086b2795b55d77da3c72986f78dbf2",
+          "export_sha256": "00923a15f6564f1036172a3dfcb3966c2a60544a0bf4c31710547060a071ae1c",
+          "source_mtime": "2026-06-12T09:45:39+08:00"
+        },
+        {
+          "path": "references/version-compatibility.md",
+          "source_sha256": "0383ffab87b391326de30e4134d8b64a30b864922f1489b28eeb6451ca9e5714",
+          "export_sha256": "0383ffab87b391326de30e4134d8b64a30b864922f1489b28eeb6451ca9e5714",
+          "source_mtime": "2026-06-12T09:45:39+08:00"
+        },
+        {
+          "path": "SKILL.md",
+          "source_sha256": "0bb73cfb68e0f586a3d60c22f86e4fa5822607c4d486f2b7b51debfa6316dc7e",
+          "export_sha256": "0bb73cfb68e0f586a3d60c22f86e4fa5822607c4d486f2b7b51debfa6316dc7e",
+          "source_mtime": "2026-06-12T09:45:39+08:00"
+        }
+      ]
+    },
+    {
+      "label": "retained-3.0",
+      "author_date": "2026-06-12T18:05:36+08:00",
+      "basis": "Newest preserved source-file modification time within a retained local version snapshot; not an original Git commit timestamp.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "source_sha256": "041e2f6eea4324768516fd71062976c8b42544847c6e6664cdd0b9d0b50b9ea4",
+          "export_sha256": "041e2f6eea4324768516fd71062976c8b42544847c6e6664cdd0b9d0b50b9ea4",
+          "source_mtime": "2026-06-12T18:02:40+08:00"
+        },
+        {
+          "path": "references/current-version.md",
+          "source_sha256": "09e6e7a01942d261d9da446f28e153a74d1897b2a6bd11d0f88bbc99b7689135",
+          "export_sha256": "09e6e7a01942d261d9da446f28e153a74d1897b2a6bd11d0f88bbc99b7689135",
+          "source_mtime": "2026-06-12T18:02:40+08:00"
+        },
+        {
+          "path": "references/distill.md",
+          "source_sha256": "b6de0b3b91fe99d78c5c3e0fe3ddafb4a56549175a9c4728f951d003e50b37e5",
+          "export_sha256": "b6de0b3b91fe99d78c5c3e0fe3ddafb4a56549175a9c4728f951d003e50b37e5",
+          "source_mtime": "2026-06-12T18:04:00+08:00"
+        },
+        {
+          "path": "references/inherit.md",
+          "source_sha256": "bede905c88dff694efe7efb6ca6a209d7ee291b99d9b4e676de256e2e02ce16d",
+          "export_sha256": "bede905c88dff694efe7efb6ca6a209d7ee291b99d9b4e676de256e2e02ce16d",
+          "source_mtime": "2026-06-12T18:05:36+08:00"
+        },
+        {
+          "path": "references/optional-advanced.md",
+          "source_sha256": "3a04b8829c5de1415d3ebbb167abdbc6f4a0a10c07e426fce595aa2257fe4ae0",
+          "export_sha256": "3a04b8829c5de1415d3ebbb167abdbc6f4a0a10c07e426fce595aa2257fe4ae0",
+          "source_mtime": "2026-06-12T18:04:00+08:00"
+        },
+        {
+          "path": "references/schema.md",
+          "source_sha256": "72feff41000c9938a419a60a179dbd3f347d400b66d42ccff78b929c9402b93e",
+          "export_sha256": "72feff41000c9938a419a60a179dbd3f347d400b66d42ccff78b929c9402b93e",
+          "source_mtime": "2026-06-12T18:02:40+08:00"
+        },
+        {
+          "path": "SKILL.md",
+          "source_sha256": "3e69f53de87500bf3aab612a602fcd499f33863b5f02fc8cec206bbba6e7e64e",
+          "export_sha256": "3e69f53de87500bf3aab612a602fcd499f33863b5f02fc8cec206bbba6e7e64e",
+          "source_mtime": "2026-06-12T18:02:39+08:00"
+        }
+      ]
+    },
+    {
+      "label": "retained-3.1",
+      "author_date": "2026-06-14T00:12:41+08:00",
+      "basis": "Newest preserved source-file modification time within a retained local version snapshot; not an original Git commit timestamp.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "source_sha256": "2e81981435bedeb5ff50b60157371c00a9fead8ce1fcea2a913898457bdd8c6e",
+          "export_sha256": "2e81981435bedeb5ff50b60157371c00a9fead8ce1fcea2a913898457bdd8c6e",
+          "source_mtime": "2026-06-14T00:12:41+08:00"
+        },
+        {
+          "path": "references/current-version.md",
+          "source_sha256": "8af43d3ce456bedeeab3190df495eeac59cf9ec5b1eda3b30dfa423d8ebcd164",
+          "export_sha256": "8af43d3ce456bedeeab3190df495eeac59cf9ec5b1eda3b30dfa423d8ebcd164",
+          "source_mtime": "2026-06-14T00:12:34+08:00"
+        },
+        {
+          "path": "references/distill.md",
+          "source_sha256": "213c03cdba512921ae9180101451e417d3da1f0c9ee211738f8fabb54dddcb43",
+          "export_sha256": "213c03cdba512921ae9180101451e417d3da1f0c9ee211738f8fabb54dddcb43",
+          "source_mtime": "2026-06-14T00:12:08+08:00"
+        },
+        {
+          "path": "references/inherit.md",
+          "source_sha256": "655261b537529900e6613aebb7ac2a4f46c5db2dcbd654218359d1d3a890ef70",
+          "export_sha256": "655261b537529900e6613aebb7ac2a4f46c5db2dcbd654218359d1d3a890ef70",
+          "source_mtime": "2026-06-14T00:11:45+08:00"
+        },
+        {
+          "path": "references/optional-advanced.md",
+          "source_sha256": "fd0176373f82847e54048ac6f2528f5acd677d4b879fedd3f8ed9edb068fb241",
+          "export_sha256": "fd0176373f82847e54048ac6f2528f5acd677d4b879fedd3f8ed9edb068fb241",
+          "source_mtime": "2026-06-14T00:12:26+08:00"
+        },
+        {
+          "path": "references/schema.md",
+          "source_sha256": "2565eea5d71c2793f2c69cdd70018bc929c199b0ec4efa62bda4b5073aec5837",
+          "export_sha256": "2565eea5d71c2793f2c69cdd70018bc929c199b0ec4efa62bda4b5073aec5837",
+          "source_mtime": "2026-06-14T00:11:58+08:00"
+        },
+        {
+          "path": "SKILL.md",
+          "source_sha256": "f7db08e406b512a82136c7ecb721f68457e241d8061fd827fe6d57efa37afade",
+          "export_sha256": "f7db08e406b512a82136c7ecb721f68457e241d8061fd827fe6d57efa37afade",
+          "source_mtime": "2026-06-14T00:11:29+08:00"
+        }
+      ]
+    },
+    {
+      "label": "retained-3.1-index-fields",
+      "author_date": "2026-06-14T00:20:45+08:00",
+      "basis": "Newest preserved source-file modification time within a retained local version snapshot; not an original Git commit timestamp.",
+      "files": [
+        {
+          "path": "agents/openai.yaml",
+          "source_sha256": "2e81981435bedeb5ff50b60157371c00a9fead8ce1fcea2a913898457bdd8c6e",
+          "export_sha256": "2e81981435bedeb5ff50b60157371c00a9fead8ce1fcea2a913898457bdd8c6e",
+          "source_mtime": "2026-06-14T00:12:41+08:00"
+        },
+        {
+          "path": "references/current-version.md",
+          "source_sha256": "8af43d3ce456bedeeab3190df495eeac59cf9ec5b1eda3b30dfa423d8ebcd164",
+          "export_sha256": "8af43d3ce456bedeeab3190df495eeac59cf9ec5b1eda3b30dfa423d8ebcd164",
+          "source_mtime": "2026-06-14T00:12:34+08:00"
+        },
+        {
+          "path": "references/distill.md",
+          "source_sha256": "213c03cdba512921ae9180101451e417d3da1f0c9ee211738f8fabb54dddcb43",
+          "export_sha256": "213c03cdba512921ae9180101451e417d3da1f0c9ee211738f8fabb54dddcb43",
+          "source_mtime": "2026-06-14T00:12:08+08:00"
+        },
+        {
+          "path": "references/inherit.md",
+          "source_sha256": "f4b61339ff9e2852228e64dc583d932b8ab17a83a550fc496a0c8787f2ddb901",
+          "export_sha256": "f4b61339ff9e2852228e64dc583d932b8ab17a83a550fc496a0c8787f2ddb901",
+          "source_mtime": "2026-06-14T00:20:39+08:00"
+        },
+        {
+          "path": "references/optional-advanced.md",
+          "source_sha256": "fd0176373f82847e54048ac6f2528f5acd677d4b879fedd3f8ed9edb068fb241",
+          "export_sha256": "fd0176373f82847e54048ac6f2528f5acd677d4b879fedd3f8ed9edb068fb241",
+          "source_mtime": "2026-06-14T00:12:26+08:00"
+        },
+        {
+          "path": "references/schema.md",
+          "source_sha256": "ad5895a242c95b9cd3fc3f59892f06ad306df1c18622f3da9ed148911643545e",
+          "export_sha256": "ad5895a242c95b9cd3fc3f59892f06ad306df1c18622f3da9ed148911643545e",
+          "source_mtime": "2026-06-14T00:20:32+08:00"
+        },
+        {
+          "path": "SKILL.md",
+          "source_sha256": "73e49fca73c94b2b11cdf3b56bf68755affe8635f2662c7d7a4c9a948b5cd98d",
+          "export_sha256": "73e49fca73c94b2b11cdf3b56bf68755affe8635f2662c7d7a4c9a948b5cd98d",
+          "source_mtime": "2026-06-14T00:20:45+08:00"
+        }
+      ]
+    }
+  ]
+}

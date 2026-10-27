@@ -1,0 +1,5 @@
+{
+  "source_roots": ["/absolute/path/to/projects"],
+  "vault": "/absolute/path/to/your/obsidian-vault",
+  "output_folder": "上下文迁移"
+}

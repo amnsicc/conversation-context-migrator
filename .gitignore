@@ -1,0 +1,17 @@
+# Machine-specific settings and conversation data must stay local.
+config/*.local.json
+.env
+.env.*
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.tmp/
+.ccm/
+.state/
+.obsidian/
+对话上下文迁移/
+验收记录/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
