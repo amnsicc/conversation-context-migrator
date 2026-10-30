@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CCM 3.2: local read ledger and one-way Obsidian graph projection. Stdlib only.
+"""CCM 3.3: local read ledger and one-way Obsidian graph projection. Stdlib only.
 
 Reading files here for maintenance/export is not conversational inheritance.
 Only the explicit `record` command records an agent's actual approved reading.
@@ -21,7 +21,7 @@ import sys
 from urllib.parse import quote, urlencode, urlparse
 import uuid
 
-VERSION = "3.2"
+VERSION = "3.3"
 MIGRATION = "对话上下文迁移"
 GRAPH_TYPES = {"继承自", "继续自"}
 REL_TYPES = GRAPH_TYPES | {"纠正了", "替代了", "汇总了"}
@@ -579,13 +579,36 @@ def record_read(project, thread, unit_path, scope, event_id):
         return state
 
 
-def finalize(project, thread, unit_path):
+def finalize(project, thread, unit_path, host_thread=None):
     unit = parse_unit(unit_path)
     if norm(unit["project"]) != norm(project) or unit["meta"].get("对话标识") != thread:
         raise ValueError("新单元宿主或对话标识不匹配")
     anchor = unit["meta"].get("本次蒸馏结束锚点", "")
     if not anchor:
         raise ValueError("新单元缺少蒸馏结束锚点")
+    coverage = None
+    rule_version = unit["meta"].get("迁移器 skill 版本", "")
+    version_numbers = tuple(int(x) for x in re.findall(r"\d+", rule_version)[:2])
+    if version_numbers >= (3, 3):
+        scope = unit["meta"].get("蒸馏请求范围")
+        if scope not in {"全部", "增量", "指定"}:
+            raise ValueError("新版本单元必须明确蒸馏请求范围：全部/增量/指定")
+        if scope == "全部":
+            if not host_thread or unit["meta"].get("宿主线程标识") != host_thread:
+                raise ValueError("全部蒸馏须显式传入当前真实 --host-thread，不能从单元或来源推测")
+            report_path = unit["meta"].get("原始历史覆盖报告")
+            if not report_path:
+                raise ValueError("全部蒸馏缺少原始历史覆盖报告，不能推进锚点")
+            # Explicit loading also supports callers importing this script by path.
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("ccm_conversation_history", Path(__file__).with_name("conversation_history.py"))
+            history = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(history)
+            status = unit["meta"].get("历史覆盖状态")
+            if status not in {"已核对可恢复原文", "部分-用户已确认"}:
+                raise ValueError("全部蒸馏缺少有效覆盖状态；有缺口须先说明并询问")
+            coverage = history.validate_coverage(report_path, host_thread, anchor,
+                                                 partial=status == "部分-用户已确认")
     index = Path(project) / MIGRATION / "上下文单元索引.md"
     indexed = False
     if index.exists():
@@ -639,6 +662,8 @@ def finalize(project, thread, unit_path):
             event["distilled_into"] = unit["id"]
         state["last_distill"] = {"id": unit["id"], "path": unit["path"], "anchor": anchor,
                                   "sha256": unit["sha256"]}
+        if coverage is not None:
+            state["last_distill"]["history_coverage"] = coverage
         write_json(path, state)
         return state
 
@@ -663,6 +688,8 @@ def main():
         if name == "record":
             p.add_argument("--scope", required=True)
             p.add_argument("--event-id", required=True)
+        if name == "finalize":
+            p.add_argument("--host-thread")
     args = parser.parse_args()
     try:
         if args.command == "inventory":
@@ -673,7 +700,7 @@ def main():
         elif args.command == "record":
             result = record_read(args.project, args.thread, args.unit, args.scope, args.event_id)
         elif args.command == "finalize":
-            result = finalize(args.project, args.thread, args.unit)
+            result = finalize(args.project, args.thread, args.unit, args.host_thread)
         else:
             result = thread_state(args.project, args.thread)
         if getattr(args, "report", None):

@@ -33,6 +33,8 @@ python <skill>/scripts/context_graph.py record --project <宿主项目> --thread
 python <skill>/scripts/context_graph.py finalize --project <宿主项目> --thread <当前对话标识> --unit <新单元绝对路径>
 ```
 
+规则 3.3 的“全部”单元还须传 `--host-thread <当前真实宿主线程ID>`，并提供 schema.md 中的历史覆盖字段。`finalize` 会验证原始日志快照、结束用户消息、全部片段回执及压缩/重叠/缺口复核；失败时不推进 `last_distill`。详见 history-recovery.md。普通增量和旧单元保持兼容，不据此把旧覆盖状态自动升级为完整。
+
 脚本检查身份、锚点、索引登记、待登记来源及既有状态中的继续自关系，再将读取关联到新单元，不修改单元原文。历史继承没有原始事件记录时保持未知，不虚构事件时间。
 
 若遇到遗漏，修正当前新单元或确认身份后重试；历史单元原文不批量修改。此步骤和 Obsidian 同步失败各自报告，不撤销已落盘的产物。
