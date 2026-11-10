@@ -1,7 +1,7 @@
 interface:
   display_name: "通用对话上下文迁移器"
-  short_description: "原文核对后全量蒸馏、增量蒸馏、三档继承及 Obsidian 单元图谱"
-  default_prompt: "使用 $conversation-context-migrator 进行蒸馏、继承、索引检查或图谱同步；继承先预检，批准时保留调用标记。"
+  short_description: "当前对话或指定聊天/材料包蒸馏、三档继承及单元图谱"
+  default_prompt: "使用 $conversation-context-migrator 蒸馏当前或指定聊天/材料包，或继承、查索引、同步图谱；继承先预检。"
 
 policy:
   allow_implicit_invocation: false

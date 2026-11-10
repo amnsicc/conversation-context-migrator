@@ -21,7 +21,7 @@ import sys
 from urllib.parse import quote, urlencode, urlparse
 import uuid
 
-VERSION = "3.3"
+VERSION = "3.4"
 MIGRATION = "对话上下文迁移"
 GRAPH_TYPES = {"继承自", "继续自"}
 REL_TYPES = GRAPH_TYPES | {"纠正了", "替代了", "汇总了"}
@@ -619,6 +619,29 @@ def finalize(project, thread, unit_path, host_thread=None):
                     indexed = True
     if not indexed:
         raise ValueError("新单元尚未在索引登记")
+    external_coverage = None
+    if version_numbers >= (3, 4) and unit["meta"].get("来源模式") not in {None, "当前对话", "指定聊天", "材料包"}:
+        raise ValueError("未知来源模式，拒绝推进状态")
+    if unit["meta"].get("来源模式") in {"指定聊天", "材料包"}:
+        if version_numbers < (3, 4) or unit["meta"].get("蒸馏请求范围") != "指定":
+            raise ValueError("外部来源使用3.4指定范围，不可冒称宿主全部历史")
+        if not host_thread or unit["meta"].get("宿主线程标识") != host_thread:
+            raise ValueError("外部来源须提供真实宿主 --host-thread")
+        report_path = unit["meta"].get("指定来源覆盖报告")
+        source_id = unit["meta"].get("来源标识")
+        if not report_path or not source_id:
+            raise ValueError("缺少指定来源报告或来源身份")
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("ccm_source_input", Path(__file__).with_name("source_input.py"))
+        external = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(external)
+        status = unit["meta"].get("指定来源覆盖状态")
+        if status not in {"声明主输入已读", "部分-用户已确认"}:
+            raise ValueError("指定来源覆盖状态无效")
+        external_coverage = external.check(report_path, host_thread, source_id, status == "部分-用户已确认")
+        expected_kind = "chat" if unit["meta"]["来源模式"] == "指定聊天" else "material"
+        if external_coverage["kind"] != expected_kind:
+            raise ValueError("来源模式与报告不一致")
     path = state_path(project, thread)
     with lock(path.with_suffix(".lock")):
         state = thread_state(project, thread)
@@ -628,6 +651,17 @@ def finalize(project, thread, unit_path, host_thread=None):
                        and r["id"] == event["source_id"] and norm(r["path"]) == norm(event["source_path"])]
             if not matches:
                 raise ValueError("新单元遗漏实际继承来源：" + event["source_id"])
+        if external_coverage is not None:
+            # External-source extraction must not advance this host's native-history anchor.
+            prior_external = state.get("source_distills", {}).get(unit["id"])
+            if prior_external and (pending or prior_external["sha256"] != unit["sha256"]):
+                raise ValueError("已登记的外部蒸馏不能消费新读取或改写原单元，须新建单元")
+            for event in pending:
+                event["distilled_into"] = unit["id"]
+            state.setdefault("source_distills", {})[unit["id"]] = {
+                "path": unit["path"], "sha256": unit["sha256"], "coverage": external_coverage}
+            write_json(path, state)
+            return state
         last = state["last_distill"]
         if last is None:
             # An upgrading thread may have pre-3.2 units but no JSON ledger.
@@ -636,7 +670,8 @@ def finalize(project, thread, unit_path, host_thread=None):
             prior = {}
             for candidate in (Path(project) / MIGRATION).glob("上下文单元-*.md"):
                 older = parse_unit(candidate)
-                if older["meta"].get("对话标识") == thread and older["id"] != unit["id"]:
+                if (older["meta"].get("对话标识") == thread and older["id"] != unit["id"]
+                        and older["meta"].get("来源模式") not in {"指定聊天", "材料包"}):
                     if older["id"] in prior and sha(prior[older["id"]]["text"]) != sha(older["text"]):
                         raise ValueError("历史线程存在同 ID 不同内容，先核对身份")
                     prior[older["id"]] = older

@@ -1,5 +1,7 @@
 # 读取账本与锚点
 
+3.4指定聊天/材料包通过source-distill.md的独立覆盖报告检查，finalize需传真实--host-thread；结果登记在source_distills，保留普通last_distill不变。实际继承过的迁移单元仍须写继承自。原生历史全部/增量继续下述旧账本规则。
+
 使用本 skill 的 `scripts/context_graph.py`，Python 3.10+，只需标准库。项目和线程标识必须是当前宿主和稳定对话标识，不得使用被继承单元的身份。
 
 ## 读取状态
